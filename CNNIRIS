@@ -24,11 +24,11 @@ from sklearn.preprocessing import StandardScaler
 
 data = pd.read_csv("Iris.csv")
 
-encoder = preprocessing.LabelEncoder()
-data['Species'] = label_encoder.fit_transform(data['Species'])
+encoder = LabelEncoder() 
+data['Species'] = encoder.fit_transform(data['Species'])
 data_iris = data.to_numpy()
 X_data = data_iris[:,0:4]
-Y_data=np_iris[:,4]
+Y_data=data_iris[:,4] 
 scaler = StandardScaler().fit(X_data)
 X_data = scaler.transform(X_data)
 Y_data = tf.keras.utils.to_categorical(Y_data,3)
