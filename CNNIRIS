@@ -1,0 +1,48 @@
+#MBALA KATEMBUE
+#KABUMBAYI TSHISUAKA
+#TSHIBANGU MADIMBA
+
+import keras
+import pandas as pd
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import Input
+from keras.utils import to_categorical
+from keras.layers import Conv2D
+from keras.layers import MaxPooling2D
+from keras.layers import Flatten
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+import tensorflow as tf
+import pandas as pd
+import os
+import tensorflow as tf
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+data = pd.read_csv("Iris.csv")
+
+encoder = preprocessing.LabelEncoder()
+data['Species'] = label_encoder.fit_transform(data['Species'])
+data_iris = data.to_numpy()
+X_data = data_iris[:,0:4]
+Y_data=np_iris[:,4]
+scaler = StandardScaler().fit(X_data)
+X_data = scaler.transform(X_data)
+Y_data = tf.keras.utils.to_categorical(Y_data,3)
+X_train,X_test,Y_train,Y_test = train_test_split( X_data, Y_data, test_size=0.10)
+model = tf.keras.models.Sequential()
+model.add(keras.layers.Dense(128,input_shape=(4,), name='Hidden-Layer-1',activation='relu'))
+model.add(keras.layers.Dense(128,name='Hidden-Layer-2',activation='relu'))
+model.add(keras.layers.Dense(3,name='Output-Layer',activation='softmax'))
+model.compile(loss='categorical_crossentropy',metrics=['accuracy'])
+
+Mod=model.fit(X_train,Y_train, batch_size=16,epochs=10,verbose=1,validation_split=0.2)
+print("\nEvaluation against Test Dataset :\n------------------------------------")
+model.evaluate(X_test,Y_test)
+Y_predict = model.predict(X_test)
+import numpy as np
+for i in range(5):
+  print(f'Vraie valeur {np.argmax(Y_test[i])}, Prédiction {np.argmax(Y_predict[i])}')
